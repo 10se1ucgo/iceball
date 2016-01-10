@@ -95,6 +95,10 @@ function client.hook_key(key, state, modif, uni)
 			client.mk_sys_execv("-s", "20737", "pkg/base", arg_closure(argv))
 		elseif key == SDLK_c then
 			client.mk_sys_execv("-s", "0", "pkg/iceball/config")
+		elseif key == SDLK_p then
+			client.mk_sys_execv("-s", "0", "pkg/iceball/pmfedit")
+		elseif key == SDLK_m then
+			client.mk_sys_execv("-s", "0", "pkg/iceball/mapedit")
 		elseif key == SDLK_ESCAPE then
 			client.hook_tick = nil
 		elseif key >= SDLK_1 and key <= SDLK_9 then
@@ -181,17 +185,19 @@ function client.hook_render()
 	font.render(text_offset, ch*0, "Press L for a local server on port 20737", 0xFFEEEEEE)
 	font.render(text_offset, ch*1, "Press Escape to quit", 0xFFEEEEEE)
 	font.render(text_offset, ch*2, "Press C to change your settings", 0xFFEEEEEE)
-	font.render(text_offset, ch*3, "Press R to update the server list", 0xFFEEEEEE)
-	font.render(text_offset, ch*4, "Press a number to join a server", 0xFFEEEEEE)
-	font.render(text_offset, ch*6, "Server list:", 0xFFEEEEEE)
+	font.render(text_offset, ch*3, "Press P to launch the PMF editor", 0xFFEEEEEE)
+	font.render(text_offset, ch*4, "Press M to launch the map editor", 0xFFEEEEEE)
+	font.render(text_offset, ch*5, "Press R to update the server list", 0xFFEEEEEE)
+	font.render(text_offset, ch*6, "Press a number to join a server", 0xFFEEEEEE)
+	font.render(text_offset, ch*8, "Server list:", 0xFFEEEEEE)
 
 	local i
 	if server_list == true then
-		font.render(text_offset, ch*7, "Fetching...", 0xFFEEEEEE)
+		font.render(text_offset, ch*9, "Fetching...", 0xFFEEEEEE)
 	elseif server_list == false then
-		font.render(text_offset, ch*7, "Could not connect to the server list. Are you connected to the internet?", 0xFFEEEEEE)
+		font.render(text_offset, ch*9, "Could not connect to the server list. Are you connected to the internet?", 0xFFEEEEEE)
 	elseif server_list == nil then
-		font.render(text_offset, ch*7, "Failed to fetch the server list.", 0xFFEEEEEE)
+		font.render(text_offset, ch*9, "Failed to fetch the server list.", 0xFFEEEEEE)
 	else
 		-- Draw version string
 		local version_string = nil
